@@ -26,14 +26,26 @@ class XmlParserTest extends TestCase
                 </record>
             </dataset>";
 
-        /** @var \SimpleXMLElement $personal */
-        $personal = $xml->setContent($xmlInput)
+        /** @var \SimpleXMLElement $dataset */
+        $dataset = $xml->setContent($xmlInput)
             ->parse();
 
         /** @var string $expectedName */
-        $expectedName = $personal->record[0]->first_name;
+        $expectedName = $dataset->record[0]->first_name;
 
         $this->assertEquals('Marrissa', $expectedName);
     }
+
+    public function test_when_parse_xml_give_empty_string_then_get_null()
+    {
+        $xml = new XmlParser();
+        $xmlInput = "";
+
+        /** @var \SimpleXMLElement $dataset */
+        $dataset = $xml->setContent($xmlInput)
+            ->parse();
+        $this->assertNull($dataset);
+    }
+
 
 }

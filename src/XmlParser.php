@@ -20,7 +20,10 @@ class XmlParser implements Loader
     }
     public function parse()
     {
-        return new SimpleXMLElement($this->content);
+        if($this->content && '' != $this->content) {
+            return new SimpleXMLElement($this->content);;
+        }
+        return null;
 
     }
 
